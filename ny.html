@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sumit ♡ Lovely</title>
+    <link rel="stylesheet" href="sumit.css">
+</head>
+
+<body>
+    <header class="header">
+        <a href="#" class="logo" onclick="showPage(0); return false;">
+            Sumit <span>♡</span> Lovely
+        </a>
+
+        <nav class="navbar">
+            <a href="#" onclick="showPage(0); return false;">Home</a>
+            <a href="#" onclick="showPage(1); return false;">Garden</a>
+            <a href="#" onclick="showPage(2); return false;">Letter</a>
+            <a href="#" onclick="showPage(3); return false;">Memories</a>
+            <a href="#" onclick="showPage(4); return false;">Surprise</a>
+        </nav>
+    </header>
+    <section class="page active" id="home">
+        <div class="content">
+            <p class="small-title">A LITTLE WORLD MADE FOR YOU</p>
+
+            <h1>Sumit <span>♡</span> Lovely</h1>
+
+            <h2>My Favourite Person, My Favourite Feeling</h2>
+
+            <p>
+                Some people make life beautiful just by being in it.
+                You are that special person in my world.
+            </p>
+
+            <button class="btn" onclick="showPage(1)">
+                Enter Our Garden 🌹
+            </button>
+        </div>
+
+        <div class="floating-rose">🌹</div>
+    </section>
+
+    <section class="page" id="garden">
+        <div class="content">
+            <p class="small-title">OUR LITTLE GARDEN</p>
+
+            <h1>A Rose For You 🌹</h1>
+
+            <p>
+                Every rose reminds me of your beauty,
+                and every petal reminds me of a beautiful moment.
+            </p>
+
+            <div class="rose-box">
+                <div class="big-rose">🌹</div>
+
+                <h2 id="roseTitle">For My Lovely</h2>
+
+                <p id="roseQuote">
+                    You make my little world more beautiful.
+                </p>
+
+                <button class="btn" onclick="pickRose()">
+                    Pick Another Rose 🌷
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section class="page" id="letter">
+        <div class="content">
+            <p class="small-title">WORDS FROM MY HEART</p>
+
+            <h1>A Letter For You 💌</h1>
+
+            <p>
+                Some feelings are too special to say aloud.
+                So, here is a little letter for you.
+            </p>
+
+            <div class="letter-box">
+                <div class="envelope">💌</div>
+
+                <button class="btn" onclick="openLetter()">
+                    Open My Letter
+                </button>
+
+                <div class="letter-paper" id="letterPaper">
+                    <h2>My Lovely ❤️</h2>
+
+                    <p>
+                        You are one of the most beautiful parts of my life.
+                        Your smile makes my days brighter, and your presence
+                        makes ordinary moments feel special.
+                    </p>
+
+                    <p>
+                        No matter how many words I write, they will never
+                        be enough to explain how special you are to me.
+                    </p>
+
+                    <p>
+                        Thank you for being you. You will always have
+                        a special place in my heart.
+                    </p>
+
+                    <h3>Forever with love,</h3>
+                    <h2>Yours, Sumit ❤️</h2>
+
+                    <button class="btn" onclick="closeLetter()">
+                        Close Letter
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="page" id="memories">
+        <div class="content">
+            <p class="small-title">OUR SPECIAL MOMENTS</p>
+
+            <h1>Beautiful Memories 📸</h1>
+
+            <p>
+                Every picture holds a moment.
+                Every moment holds a feeling.
+            </p>
+
+            <div class="memories-grid">
+
+                <div class="memory-card">
+                    <img
+                        src="./Image/file_00000000e9a881fa9c73449c61b9a72e.png"
+                        alt="Special memory one"
+                    >
+                    <h3>A Special Moment ❤️</h3>
+                </div>
+
+                <div class="memory-card">
+                    <img
+                        src="./Image/file_0000000057848211b8bee136beb82837.png"
+                        alt="Special memory two"
+                    >
+                    <h3>Sweet Memories 🌸</h3>
+                </div>
+
+                <div class="memory-card">
+                    <img
+                        src="./Image/Snapchat-440921682.jpg"
+                        alt="Special memory three"
+                    >
+                    <h3>Always Remember 🌹</h3>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="page" id="surprise">
+        <div class="content">
+            <p class="small-title">A LITTLE SURPRISE FOR YOU</p>
+
+            <h1>One Last Little Surprise 🎁</h1>
+
+            <p>
+                There is something special I want you to remember.
+            </p>
+
+            <div class="surprise-box">
+                <div class="gift">🎁</div>
+
+                <button class="btn" onclick="openSurprise()">
+                    Open Your Surprise ❤️
+                </button>
+
+                <div id="surpriseMessage" class="surprise-message">
+                    <h2>My Lovely, You Are Special! 💖</h2>
+
+                    <p>
+                        If I could give you one thing in life,
+                        I would give you the ability to see yourself
+                        through my eyes. Then you would understand
+                        how precious you are to me.
+                    </p>
+
+                    <h2>Sumit ♡ Lovely</h2>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="page-controls">
+        <button class="btn" onclick="previousPage()">
+            ← Previous
+        </button>
+
+        <span id="pageNumber">1 / 5</span>
+
+        <button class="btn" onclick="nextPage()">
+            Next →
+        </button>
+    </footer>
+
+    <script>
+        const pages = document.querySelectorAll(".page");
+        let currentPage = 0;
+
+        function showPage(index) {
+            if (index < 0 || index >= pages.length) return;
+
+            pages[currentPage].classList.remove("active");
+
+            currentPage = index;
+
+            pages[currentPage].classList.add("active");
+
+            document.getElementById("pageNumber").textContent =
+                (currentPage + 1) + " / " + pages.length;
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        }
+
+        function nextPage() {
+            showPage((currentPage + 1) % pages.length);
+        }
+
+        function previousPage() {
+            showPage(
+                (currentPage - 1 + pages.length) % pages.length
+            );
+        }
+
+        const roseQuotes = [
+            "You make my little world more beautiful. ❤️",
+            "Every flower reminds me of you. 🌷",
+            "You are my favourite reason to smile. 💖",
+            "My world is more beautiful with you in it. 🌹",
+            "You will always be special to me. 💕"
+        ];
+
+        let roseIndex = 0;
+
+        function pickRose() {
+            roseIndex = (roseIndex + 1) % roseQuotes.length;
+
+            document.getElementById("roseQuote").textContent =
+                roseQuotes[roseIndex];
+
+            document.getElementById("roseTitle").textContent =
+                "Rose Number " + (roseIndex + 1) + " for My Lovely 🌹";
+        }
+
+        function openLetter() {
+            document.getElementById("letterPaper").classList.add("show");
+        }
+
+        function closeLetter() {
+            document.getElementById("letterPaper").classList.remove("show");
+        }
+
+        function openSurprise() {
+            document.getElementById("surpriseMessage").classList.add("show");
+        }
+    </script>
+
+</body>
+</html>

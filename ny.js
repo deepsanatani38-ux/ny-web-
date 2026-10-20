@@ -1,360 +1,310 @@
 
 
-const pages = Array.from(document.querySelectorAll(".page"));
-let currentPage = Math.max(
-    0,
-    pages.findIndex(page => page.classList.contains("active"))
-);
+document.addEventListener("DOMContentLoaded", () => {
+  const $ = (selector, parent = document) =>
+    parent.querySelector(selector);
 
-let roseIndex = 0;
+  const $$ = (selector, parent = document) =>
+    [...parent.querySelectorAll(selector)];
 
+  const reduceMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
 
-
-const animationStyles = document.createElement("style");
-
-animationStyles.textContent = `
-    .page {
-        will-change: opacity, transform;
+  // 1. INITIALIZE ICONS
+  function refreshIcons() {
+    if (window.lucide) {
+      window.lucide.createIcons();
     }
+  }
 
-    .page.active {
-        animation: romanticPageIn 0.65s cubic-bezier(.2,.8,.2,1) both;
-    }
+  refreshIcons();
 
-    @keyframes romanticPageIn {
-        from {
-            opacity: 0;
-            transform: translateY(25px) scale(.98);
-            filter: blur(4px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-            filter: blur(0);
-        }
-    }
+  // 2. PAGE ENTRANCE + HERO TITLE
+  document.body.classList.add("page-ready");
 
-    .love-particle {
-        position: fixed;
-        z-index: 99999;
-        pointer-events: none;
-        font-size: 22px;
-        line-height: 1;
-        animation: loveFloat 1.15s ease-out forwards;
-    }
+  const heroTitle = $(".hero-title");
 
-    @keyframes loveFloat {
-        0% {
-            opacity: 0;
-            transform: translate(0, 0) scale(.3) rotate(0deg);
-        }
-        15% {
-            opacity: 1;
-        }
-        100% {
-            opacity: 0;
-            transform: translate(var(--move-x), var(--move-y))
-                       scale(1.5) rotate(var(--rotate));
-        }
-    }
+  if (heroTitle) {
+    heroTitle.classList.add("title-animated");
+  }
 
-    .btn {
-        position: relative;
-        overflow: hidden;
-        -webkit-tap-highlight-color: transparent;
-        transition:
-            transform .25s ease,
-            box-shadow .25s ease,
-            filter .25s ease;
-    }
+  // 3. MOBILE MENU
+  const menuToggle = $("#menuToggle");
+  const nav = $("#nav");
 
-    .btn:active {
-        transform: scale(.94);
-        filter: brightness(1.2);
-    }
+  function closeMenu() {
+    if (!menuToggle || !nav) return;
 
-    .navbar a {
-        transition: color .25s ease, text-shadow .25s ease;
-    }
+    nav.classList.remove("open");
+    menuToggle.setAttribute("aria-expanded", "false");
+    menuToggle.setAttribute("aria-label", "Open navigation");
+    menuToggle.innerHTML = '<i data-lucide="menu"></i>';
 
-    .navbar a.nav-active {
-        color: #ff75a9;
-        text-shadow: 0 0 12px rgba(255, 117, 169, .65);
-    }
+    refreshIcons();
+  }
 
-    .letter-paper.show,
-    .surprise-message.show {
-        animation: romanticReveal .65s cubic-bezier(.2,.8,.2,1) both;
-    }
+  if (menuToggle && nav) {
+    menuToggle.addEventListener("click", () => {
+      const isOpen = nav.classList.toggle("open");
 
-    @keyframes romanticReveal {
-        from {
-            opacity: 0;
-            transform: translateY(18px) scale(.95);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-        }
-    }
+      menuToggle.setAttribute(
+        "aria-expanded",
+        String(isOpen)
+      );
 
-    @media (prefers-reduced-motion: reduce) {
-        .page.active,
-        .love-particle,
-        .letter-paper.show,
-        .surprise-message.show {
-            animation-duration: .01ms !important;
-        }
-    }
-`;
+      menuToggle.setAttribute(
+        "aria-label",
+        isOpen ? "Close navigation" : "Open navigation"
+      );
 
-document.head.appendChild(animationStyles);
+      menuToggle.innerHTML = isOpen
+        ? '<i data-lucide="x"></i>'
+        : '<i data-lucide="menu"></i>';
 
+      refreshIcons();
+    });
 
+    $$(".nav-link", nav).forEach((link) => {
+      link.addEventListener("click", closeMenu);
+    });
 
-function makeHearts(x, y, amount = 9) {
-    const symbols = ["❤️", "💕", "💖", "💗", "🌹"];
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") closeMenu();
+    });
 
-    for (let i = 0; i < amount; i++) {
-        const heart = document.createElement("span");
+    document.addEventListener("click", (event) => {
+      if (
+        nav.classList.contains("open") &&
+        !nav.contains(event.target) &&
+        !menuToggle.contains(event.target)
+      ) {
+        closeMenu();
+      }
+    });
+  }
 
-        heart.className = "love-particle";
-        heart.textContent =
-            symbols[Math.floor(Math.random() * symbols.length)];
+  // 4. CINEMATIC SCROLL REVEALS
+  const revealItems = $$(".reveal");
 
-        heart.style.left = x + "px";
-        heart.style.top = y + "px";
-        heart.style.setProperty(
-            "--move-x",
-            (Math.random() * 180 - 90) + "px"
-        );
-        heart.style.setProperty(
-            "--move-y",
-            (-50 - Math.random() * 150) + "px"
-        );
-        heart.style.setProperty(
-            "--rotate",
-            (Math.random() * 100 - 50) + "deg"
-        );
-        heart.style.fontSize = (16 + Math.random() * 17) + "px";
+  if (reduceMotion || !("IntersectionObserver" in window)) {
+    revealItems.forEach((item) => {
+      item.classList.add("visible");
+    });
+  } else {
+    const revealObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
 
-        document.body.appendChild(heart);
-
-        setTimeout(() => heart.remove(), 1300);
-    }
-}
-
-function heartBurstFrom(element, amount = 9) {
-    if (!element) return;
-
-    const rect = element.getBoundingClientRect();
-
-    makeHearts(
-        rect.left + rect.width / 2,
-        rect.top + rect.height / 2,
-        amount
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        });
+      },
+      {
+        threshold: 0.12,
+        rootMargin: "0px 0px -30px 0px"
+      }
     );
-}
 
+    revealItems.forEach((item, index) => {
+      // Consecutive items appear one after another.
+      const delay = Math.min(index % 4, 3) * 90;
 
-
-function showPage(index) {
-    if (!pages.length) return;
-    if (index < 0 || index >= pages.length) return;
-
-    if (pages[currentPage]) {
-        pages[currentPage].classList.remove("active");
-    }
-
-    currentPage = index;
-
-    pages[currentPage].classList.remove("active");
-    void pages[currentPage].offsetWidth;
-    pages[currentPage].classList.add("active");
-
-    updatePageNumber();
-    updateActiveNavigation();
-
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
+      item.style.transitionDelay = `${delay}ms`;
+      revealObserver.observe(item);
     });
+  }
 
-    const content = pages[currentPage].querySelector(".content");
+  // 5. SKILL BARS ANIMATION
+  const skillsSection = $("#skills");
+  const skillBars = $$(".skill-track span");
 
-    if (content) {
-        const rect = content.getBoundingClientRect();
+  function animateSkillBars() {
+    skillBars.forEach((bar, index) => {
+      const target = bar.dataset.width || "0%";
 
-        makeHearts(
-            window.innerWidth / 2,
-            Math.max(100, rect.top + 20),
-            5
-        );
-    }
-}
+      if (!reduceMotion) {
+        bar.style.transitionDelay = `${index * 120}ms`;
+      }
 
-function nextPage() {
-    showPage((currentPage + 1) % pages.length);
-}
-
-function previousPage() {
-    showPage((currentPage - 1 + pages.length) % pages.length);
-}
-
-function updatePageNumber() {
-    const number = document.getElementById("pageNumber");
-
-    if (number) {
-        number.textContent =
-            (currentPage + 1) + " / " + pages.length;
-    }
-}
-
-function updateActiveNavigation() {
-    const links = document.querySelectorAll(".navbar a");
-
-    links.forEach((link, index) => {
-        link.classList.toggle("nav-active", index === currentPage);
+      bar.style.width = target;
     });
-}
+  }
 
+  if (
+    skillsSection &&
+    "IntersectionObserver" in window &&
+    !reduceMotion
+  ) {
+    const skillObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            animateSkillBars();
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
 
+    skillObserver.observe(skillsSection);
+  } else {
+    animateSkillBars();
+  }
 
+  // 6. SCROLL PROGRESS BAR
+  const progress = $("#scrollProgress");
+  let scrollScheduled = false;
 
-const roseQuotes = [
-    "You make my little world more beautiful. ❤️",
-    "Every flower reminds me of you. 🌷",
-    "You are my favourite reason to smile. 💖",
-    "My world is more beautiful with you in it. 🌹",
-    "You will always be special to me. 💕",
-    "If love were a flower, you would be my whole garden. 🌸",
-    "One rose for you, and a thousand feelings in my heart. ❤️"
-];
+  function updateScrollProgress() {
+    const root = document.documentElement;
 
-function pickRose() {
-    roseIndex = (roseIndex + 1) % roseQuotes.length;
+    const maxScroll =
+      root.scrollHeight - window.innerHeight;
 
-    const quote = document.getElementById("roseQuote");
-    const title = document.getElementById("roseTitle");
-    const rose = document.querySelector(".big-rose");
+    const currentScroll = Math.max(0, window.scrollY);
 
-    if (quote) {
-        quote.textContent = roseQuotes[roseIndex];
+    const percent = maxScroll > 0
+      ? Math.min(100, (currentScroll / maxScroll) * 100)
+      : 0;
+
+    if (progress) {
+      progress.style.width = `${percent}%`;
     }
 
-    if (title) {
-        title.textContent = "Rose Number " +
-            (roseIndex + 1) + " for My Lovely 🌹";
-    }
+    scrollScheduled = false;
+  }
 
-    if (rose) {
-        rose.animate(
-            [
-                { transform: "scale(1) rotate(0deg)" },
-                { transform: "scale(1.3) rotate(-10deg)" },
-                { transform: "scale(1) rotate(0deg)" }
-            ],
-            {
-                duration: 550,
-                easing: "ease-out"
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (!scrollScheduled) {
+        scrollScheduled = true;
+        window.requestAnimationFrame(updateScrollProgress);
+      }
+    },
+    { passive: true }
+  );
+
+  updateScrollProgress();
+
+  // 7. ACTIVE NAVIGATION LINK
+  const pageSections = $$("main section[id]");
+  const navLinks = $$(".nav-link");
+
+  if ("IntersectionObserver" in window) {
+    const activeSectionObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+
+          navLinks.forEach((link) => {
+            const isActive =
+              link.getAttribute("href") ===
+              `#${entry.target.id}`;
+
+            link.classList.toggle("active", isActive);
+
+            if (isActive) {
+              link.setAttribute("aria-current", "location");
+            } else {
+              link.removeAttribute("aria-current");
             }
-        );
-
-        heartBurstFrom(rose, 12);
-    }
-}
-
-
-
-function openLetter() {
-    const letter = document.getElementById("letterPaper");
-
-    if (!letter) return;
-
-    letter.classList.add("show");
-
-    const button = document.querySelector(
-        "#letter .letter-box .btn"
+          });
+        });
+      },
+      {
+        rootMargin: "-30% 0px -60% 0px",
+        threshold: 0
+      }
     );
 
-    heartBurstFrom(button || letter, 10);
-}
-
-function closeLetter() {
-    const letter = document.getElementById("letterPaper");
-
-    if (letter) {
-        letter.classList.remove("show");
-    }
-}
-
-
-
-function openSurprise() {
-    const message = document.getElementById("surpriseMessage");
-
-    if (!message) return;
-
-    message.classList.add("show");
-
-    const gift = document.querySelector(".gift");
-
-    if (gift) {
-        gift.animate(
-            [
-                { transform: "scale(1) rotate(0deg)" },
-                { transform: "scale(1.2) rotate(8deg)" },
-                { transform: "scale(1.1) rotate(-8deg)" },
-                { transform: "scale(1) rotate(0deg)" }
-            ],
-            {
-                duration: 700,
-                easing: "ease-in-out"
-            }
-        );
-    }
-
-    
-    makeHearts(
-        window.innerWidth / 2,
-        window.innerHeight / 2,
-        28
-    );
-}
-
-
-document.querySelectorAll(".btn").forEach(button => {
-    button.addEventListener("click", function () {
-        heartBurstFrom(this, 5);
+    pageSections.forEach((section) => {
+      activeSectionObserver.observe(section);
     });
-});
+  }
 
+  // 8. PROFILE PHOTO
+  const profilePhoto = $("#profilePhoto");
 
+  if (profilePhoto) {
+    const showPhoto = () => {
+      if (profilePhoto.naturalWidth > 0) {
+        profilePhoto.classList.add("loaded");
+      }
+    };
 
-document.addEventListener("keydown", function (event) {
-    const tag = event.target.tagName;
+    profilePhoto.addEventListener("load", showPhoto);
 
-    if (
-        tag === "INPUT" ||
-        tag === "TEXTAREA" ||
-        event.target.isContentEditable
-    ) {
-        return;
+    profilePhoto.addEventListener("error", () => {
+      profilePhoto.classList.remove("loaded");
+    });
+
+    if (profilePhoto.complete) {
+      showPhoto();
     }
+  }
 
-    if (event.key === "ArrowRight") {
-        nextPage();
+  // 9. SUBTLE 3D HOVER EFFECT ON CARDS
+  // Desktop pointer devices only.
+  const canHover =
+    window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
+  if (canHover && !reduceMotion) {
+    const tiltCards = $$(".project-card, .mini-card");
+
+    tiltCards.forEach((card) => {
+      card.addEventListener("pointermove", (event) => {
+        const rect = card.getBoundingClientRect();
+
+        const x = (event.clientX - rect.left) / rect.width;
+        const y = (event.clientY - rect.top) / rect.height;
+
+        const rotateY = (x - 0.5) * 4;
+        const rotateX = (0.5 - y) * 4;
+
+        card.style.transform =
+          `perspective(800px) rotateX(${rotateX}deg) ` +
+          `rotateY(${rotateY}deg) translateY(-4px)`;
+      });
+
+      card.addEventListener("pointerleave", () => {
+        card.style.transform = "";
+      });
+    });
+  }
+
+  // 10. BUTTON CLICK FEEDBACK
+  $$(".button, .project-link").forEach((button) => {
+    button.addEventListener("click", () => {
+      button.classList.remove("click-feedback");
+
+      // Restart the CSS animation when clicked repeatedly.
+      void button.offsetWidth;
+
+      button.classList.add("click-feedback");
+
+      window.setTimeout(() => {
+        button.classList.remove("click-feedback");
+      }, 350);
+    });
+  });
+
+  // 11. CURRENT COPYRIGHT YEAR
+  const year = $("#year");
+
+  if (year) {
+    year.textContent = new Date().getFullYear();
+  }
+
+  // 12. RESET MOBILE MENU ON DESKTOP RESIZE
+  const desktopQuery = window.matchMedia("(min-width: 701px)");
+
+  desktopQuery.addEventListener("change", (event) => {
+    if (event.matches) {
+      closeMenu();
     }
-
-    if (event.key === "ArrowLeft") {
-        previousPage();
-    }
+  });
 });
-
-
-pages.forEach((page, index) => {
-    page.classList.toggle("active", index === currentPage);
-});
-
-updatePageNumber();
-updateActiveNavigation();

@@ -1,0 +1,64 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#05070b">
+  <title>GLITCH//ACCESS — Login</title>
+  <link rel="stylesheet" href="login.css">
+</head>
+<body>
+  <div class="scanlines"></div>
+
+  <main class="container">
+    <header class="brand">GLITCH<span>//</span>ACCESS</header>
+    <p class="status"><i></i> SECURE CONNECTION</p>
+
+    <section class="login-card">
+      <p class="eyebrow">IDENTITY PROTOCOL / 01</p>
+      <h1>WELCOME <span>BACK</span><b>_</b></h1>
+      <p class="subtitle">Your next chapter starts here.</p>
+
+      <div class="tabs">
+        <button id="loginTab" class="active" type="button">SIGN IN</button>
+        <button id="signupTab" type="button">CREATE ACCOUNT</button>
+      </div>
+
+      <form id="authForm">
+        <div id="nameGroup" class="hidden">
+          <label for="name">DISPLAY NAME</label>
+          <input id="name" type="text" maxlength="60" autocomplete="name">
+        </div>
+
+        <label for="email">EMAIL ADDRESS</label>
+        <input id="email" type="email" placeholder="you@example.com"
+          autocomplete="email" required>
+
+        <label for="password">PASSWORD</label>
+        <input id="password" type="password" minlength="8"
+          placeholder="At least 8 characters"
+          autocomplete="current-password" required>
+
+        <div id="consentGroup" class="consent hidden">
+          <input id="consent" type="checkbox">
+          <label for="consent">I agree to create an account and to the
+            <a href="privacy.html">Privacy Notice</a>.</label>
+        </div>
+
+        <button class="submit" id="submitBtn" type="submit">
+          <span id="submitText">AUTHENTICATE</span><span>↗</span>
+        </button>
+        <p id="message" role="status"></p>
+      </form>
+
+      <p class="footer-text">/// AUTHENTICATION POWERED BY SUPABASE</p>
+    </section>
+    <footer class="bottom">SYSTEM ONLINE <span>•</span> GLITCH//ACCESS</footer>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-config.js"></script>
+  <script src="login.js"></script>
+</body>
+</html>

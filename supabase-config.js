@@ -1,5 +1,5 @@
 
 window.supabaseClient = window.supabase.createClient(
-  "YOUR_SUPABASE_PROJECT_URL",
-  "YOUR_SUPABASE_PUBLISHABLE_KEY"
+  "https://mjbwszlugrmgmiqczrfz.supabase.co/rest/v1/",
+  "sb_publishable_ImHfP8K2Ip6Q-xTBjX05Pw_XyIE1wE_"
 );

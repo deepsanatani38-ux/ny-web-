@@ -1,207 +1,434 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sumit ♡ Lovely</title>
-    <link rel="stylesheet" href="ny.css">
-    <script src="ny.js"></script>
-</head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#061326">
+  <meta name="description" content="Sumit Babu | Software Development and Cybersecurity Portfolio">
+  <title>Sumit Babu | Developer Portfolio</title>
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="ny.css">
+  <script src="ny.js" defer></script>
+</head>
 <body>
-    <header class="header">
-        <a href="#" class="logo" onclick="showPage(0); return false;">
-            Sumit <span>♡</span> Lovely
+
+  <div class="scroll-progress" id="scrollProgress"></div>
+  <div class="background-glow glow-one"></div>
+  <div class="background-glow glow-two"></div>
+  <header class="site-header" id="top">
+    <a class="brand" href="#home">
+      <span class="brand-mark">S<span>.</span></span>
+      <span>SUMIT <b>BABU</b></span>
+    </a>
+
+    <button class="menu-toggle" id="menuToggle"
+      aria-label="Open navigation" aria-expanded="false">
+      <i data-lucide="menu"></i>
+    </button>
+
+    <nav class="nav" id="nav">
+      <a class="nav-link active" href="#home">Home</a>
+      <a class="nav-link" href="#about">About</a>
+      <a class="nav-link" href="#skills">Skills</a>
+      <a class="nav-link" href="#journey">Journey</a>
+      <a class="nav-link" href="#projects">Projects</a>
+      <a class="nav-link" href="#contact">Contact ↗</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero section-shell" id="home">
+      <div class="hero-copy">
+        <div class="eyebrow reveal">
+          <span class="status-dot"></span>
+          B.TECH CSE STUDENT
+          <span class="eyebrow-line"></span>
+        </div>
+
+        <p class="hero-hello reveal">Hello, I'm</p>
+
+        <h1 class="hero-title reveal">
+          Sumit <span>Babu</span><br>
+          <span class="outline-text">Building a safer</span><br>
+          digital world<span class="red-dot">.</span>
+        </h1>
+
+        <p class="hero-description reveal">
+          Aspiring <strong>Software Developer</strong> and
+          <strong>Cybersecurity Professional</strong>.
+          I’m learning, building, and exploring technology
+          one project at a time.
+        </p>
+
+        <div class="hero-actions reveal">
+          <a class="button button-primary" href="#projects">
+            Explore my work <i data-lucide="arrow-up-right"></i>
+          </a>
+          <a class="button button-ghost" href="#contact">
+            Let's connect <i data-lucide="move-right"></i>
+          </a>
+        </div>
+
+        <div class="hero-meta reveal">
+          <span><i data-lucide="map-pin"></i> Bareilly, India</span>
+          <span class="meta-divider"></span>
+          <span><i data-lucide="graduation-cap"></i> Invertis University</span>
+        </div>
+      </div>
+      <div class="hero-visual reveal">
+        <div class="orbit orbit-a"></div>
+        <div class="orbit orbit-b"></div>
+
+        <div class="portrait-card">
+          <div class="portrait-placeholder" id="portraitPlaceholder">
+            <i data-lucide="user-round"></i>
+            <span>YOUR PHOTO</span>
+            <small>images/profile.jpg</small>
+          </div>
+
+          <img
+            class="profile-photo"
+            id="profilePhoto"
+            src="Images/sumit.jpg"
+            alt="Sumit Babu"
+          >
+
+          <div class="photo-label">
+            <span class="photo-label-dot"></span>
+            Learning in public
+          </div>
+        </div>
+
+        <div class="floating-chip chip-code">
+          <i data-lucide="code-2"></i>
+          <span><b>Code</b><small>Build & create</small></span>
+        </div>
+
+        <div class="floating-chip chip-shield">
+          <i data-lucide="shield-check"></i>
+          <span><b>Secure</b><small>Think defensively</small></span>
+        </div>
+
+        <div class="hero-stamp">
+          BETTER CODE<br>SAFER TOMORROW<span> ↗</span>
+        </div>
+
+        <div class="visual-grid"></div>
+      </div>
+
+      <a class="scroll-cue" href="#about">
+        <span class="mouse"><span></span></span>
+        <span>SCROLL TO EXPLORE</span>
+        <i data-lucide="arrow-down"></i>
+      </a>
+    </section>
+    <section class="intro-strip">
+      <div class="strip-item"><i data-lucide="terminal"></i><span>LEARN</span></div>
+      <span class="strip-star">✳</span>
+      <div class="strip-item"><i data-lucide="layers-3"></i><span>BUILD</span></div>
+      <span class="strip-star">✳</span>
+      <div class="strip-item"><i data-lucide="shield-check"></i><span>SECURE</span></div>
+      <span class="strip-star">✳</span>
+      <div class="strip-item"><i data-lucide="trending-up"></i><span>GROW</span></div>
+    </section>
+    <section class="section section-shell" id="about">
+      <div class="section-heading reveal">
+        <span class="section-kicker">01 / THE PERSON BEHIND THE CODE</span>
+        <h2>Curious mind.<br><span>Purposeful builder.</span></h2>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-main glass-card reveal">
+          <div class="card-icon"><i data-lucide="sparkles"></i></div>
+          <h3>A little about me</h3>
+
+          <p>
+            I’m a Computer Science and Engineering student at
+            Invertis University, Bareilly. I enjoy learning how
+            websites work, writing code, and understanding how
+            digital systems can be made more secure.
+          </p>
+
+          <p>
+            Right now, I’m strengthening my foundations in
+            programming and web development while exploring
+            cybersecurity and ethical hacking in a responsible,
+            legal way.
+          </p>
+
+          <div class="quote-line">Always learning, always improving.</div>
+        </div>
+
+        <div class="about-side">
+          <div class="mini-card reveal">
+            <span class="mini-number">01</span>
+            <i data-lucide="code-2"></i>
+            <h3>Build things</h3>
+            <p>Turn ideas into useful web experiences.</p>
+          </div>
+
+          <div class="mini-card reveal">
+            <span class="mini-number">02</span>
+            <i data-lucide="shield-check"></i>
+            <h3>Think secure</h3>
+            <p>Learn security fundamentals and safe practices.</p>
+          </div>
+
+          <div class="mini-card reveal">
+            <span class="mini-number">03</span>
+            <i data-lucide="mountain"></i>
+            <h3>Keep growing</h3>
+            <p>Stay curious, practice consistently, improve daily.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="section section-shell" id="skills">
+      <div class="section-heading reveal">
+        <span class="section-kicker">02 / MY TOOLKIT</span>
+        <h2>Skills I'm <span>growing.</span></h2>
+        <p class="section-subtitle">
+          A work in progress — learning by practicing,
+          not just collecting badges.
+        </p>
+      </div>
+
+      <div class="skills-layout">
+        <div class="skills-panel glass-card reveal">
+          <div class="panel-title">
+            <span class="panel-icon"><i data-lucide="braces"></i></span>
+            <div>
+              <h3>Development</h3>
+              <p>Programming and web foundations</p>
+            </div>
+          </div>
+
+          <div class="skill-row">
+            <div class="skill-info"><span>HTML</span><small>Web structure</small></div>
+            <span class="skill-level">Learning</span>
+            <div class="skill-track"><span data-width="78%"></span></div>
+          </div>
+
+          <div class="skill-row">
+            <div class="skill-info"><span>CSS</span><small>Design and responsive layouts</small></div>
+            <span class="skill-level">Learning</span>
+            <div class="skill-track"><span data-width="65%"></span></div>
+          </div>
+
+          <div class="skill-row">
+            <div class="skill-info"><span>JavaScript</span><small>Logic and interactivity</small></div>
+            <span class="skill-level">Learning</span>
+            <div class="skill-track"><span data-width="38%"></span></div>
+          </div>
+
+          <div class="skill-row">
+            <div class="skill-info"><span>Java</span><small>Programming fundamentals</small></div>
+            <span class="skill-level">Learning</span>
+            <div class="skill-track"><span data-width="32%"></span></div>
+          </div>
+        </div>
+
+        <div class="skills-panel glass-card reveal">
+          <div class="panel-title">
+            <span class="panel-icon red"><i data-lucide="shield-check"></i></span>
+            <div>
+              <h3>Cybersecurity</h3>
+              <p>Exploring security fundamentals</p>
+            </div>
+          </div>
+
+          <div class="cyber-list">
+            <div><i data-lucide="check-circle-2"></i><span>Ethical hacking fundamentals</span><b>01</b></div>
+            <div><i data-lucide="check-circle-2"></i><span>Network security basics</span><b>02</b></div>
+            <div><i data-lucide="check-circle-2"></i><span>Web application security</span><b>03</b></div>
+            <div><i data-lucide="check-circle-2"></i><span>Vulnerability awareness</span><b>04</b></div>
+            <div><i data-lucide="check-circle-2"></i><span>Linux and security tools</span><b>05</b></div>
+          </div>
+
+          <p class="ethical-note">
+            <i data-lucide="info"></i>
+            Practicing only in authorized labs and learning environments.
+          </p>
+        </div>
+      </div>
+
+      <div class="tools-row reveal">
+        <span class="tools-label">TOOLS I USE / EXPLORE</span>
+        <div class="tool-pill"><i data-lucide="code"></i> VS Code</div>
+        <div class="tool-pill"><i data-lucide="git-branch"></i> Git & GitHub</div>
+        <div class="tool-pill"><i data-lucide="terminal"></i> Terminal</div>
+        <div class="tool-pill"><i data-lucide="monitor"></i> Kali Linux <small>learning</small></div>
+      </div>
+    </section>
+    <section class="section journey-section" id="journey">
+      <div class="section-shell">
+        <div class="section-heading reveal">
+          <span class="section-kicker">03 / THE JOURNEY</span>
+          <h2>Learning today.<br><span>Ready for tomorrow.</span></h2>
+        </div>
+
+        <div class="timeline">
+          <div class="timeline-item reveal">
+            <div class="timeline-marker"><i data-lucide="graduation-cap"></i></div>
+            <div class="timeline-card">
+              <span class="timeline-date">2026 — 2030</span>
+              <h3>B.Tech — Computer Science & Engineering</h3>
+              <p>Invertis University · Bareilly, Uttar Pradesh</p>
+              <span class="timeline-tag">CURRENT CHAPTER</span>
+            </div>
+          </div>
+
+          <div class="timeline-item reveal">
+            <div class="timeline-marker"><i data-lucide="code-2"></i></div>
+            <div class="timeline-card">
+              <span class="timeline-date">IN PROGRESS</span>
+              <h3>Programming & web development</h3>
+              <p>
+                Practicing HTML, CSS, JavaScript and Java by creating
+                small projects and improving my fundamentals.
+              </p>
+            </div>
+          </div>
+
+          <div class="timeline-item reveal">
+            <div class="timeline-marker"><i data-lucide="shield"></i></div>
+            <div class="timeline-card">
+              <span class="timeline-date">NEXT MILESTONE</span>
+              <h3>Cybersecurity foundations</h3>
+              <p>
+                Learning networking, Linux, web security and ethical
+                testing in legal lab environments.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="section section-shell" id="projects">
+      <div class="section-heading reveal">
+        <span class="section-kicker">04 / MAKING IDEAS REAL</span>
+        <h2>Projects & <span>experiments.</span></h2>
+        <p class="section-subtitle">
+          Starter project concepts. Replace these with your real work as you build it.
+        </p>
+      </div>
+
+      <div class="project-grid">
+        <article class="project-card reveal">
+          <div class="project-art art-one">
+            <span class="art-orbit"></span>
+            <i data-lucide="panel-top"></i>
+            <span class="art-index">PROJECT 01</span>
+          </div>
+          <div class="project-content">
+            <div class="project-tags"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
+            <h3>Personal Portfolio</h3>
+            <p>A responsive website to present my learning journey, skills and projects.</p>
+            <a href="#contact" class="project-link">Discuss this project <i data-lucide="arrow-up-right"></i></a>
+          </div>
+        </article>
+
+        <article class="project-card reveal">
+          <div class="project-art art-two">
+            <span class="art-orbit"></span>
+            <i data-lucide="terminal"></i>
+            <span class="art-index">PROJECT 02</span>
+          </div>
+          <div class="project-content">
+            <div class="project-tags"><span>Java</span><span>Practice</span></div>
+            <h3>Java Practice Lab</h3>
+            <p>A collection of beginner programs for logic, loops and problem-solving.</p>
+            <a href="#contact" class="project-link">Discuss this project <i data-lucide="arrow-up-right"></i></a>
+          </div>
+        </article>
+
+        <article class="project-card reveal">
+          <div class="project-art art-three">
+            <span class="art-orbit"></span>
+            <i data-lucide="lock-keyhole"></i>
+            <span class="art-index">PROJECT 03</span>
+          </div>
+          <div class="project-content">
+            <div class="project-tags"><span>Cybersecurity</span><span>Learning</span></div>
+            <h3>Security Notes</h3>
+            <p>Beginner-friendly notes on safe browsing and security fundamentals.</p>
+            <a href="#contact" class="project-link">Discuss this project <i data-lucide="arrow-up-right"></i></a>
+          </div>
+        </article>
+      </div>
+
+      <p class="project-disclaimer reveal">
+        <i data-lucide="info"></i>
+        These are example concepts, not claims of completed projects.
+      </p>
+    </section>
+    <section class="goal-band">
+      <div class="goal-inner section-shell reveal">
+        <div class="goal-symbol"><i data-lucide="target"></i></div>
+        <div>
+          <span class="section-kicker">THE BIG PICTURE</span>
+          <h2>Better code. <span>Safer tomorrow.</span></h2>
+          <p>
+            My goal is to become a skilled cybersecurity professional
+            who builds useful software, secures digital systems and
+            keeps learning along the way.
+          </p>
+        </div>
+        <a class="button button-primary" href="#contact">
+          Connect with me <i data-lucide="arrow-up-right"></i>
+        </a>
+      </div>
+    </section>
+    <section class="section section-shell contact-section" id="contact">
+      <div class="section-heading reveal">
+        <span class="section-kicker">05 / SAY HELLO</span>
+        <h2>Have an idea?<br><span>Let's connect.</span></h2>
+        <p class="section-subtitle">
+          Open to learning, collaboration and beginner-friendly project conversations.
+        </p>
+      </div>
+
+      <div class="contact-grid">
+        <a class="contact-card reveal" href="mailto:deepsanatani38@gmail.com">
+          <span class="contact-icon"><i data-lucide="mail"></i></span>
+          <span><small>EMAIL ME</small><b>deepsanatani38@gmail.com</b></span>
+          <i class="contact-arrow" data-lucide="arrow-up-right"></i>
         </a>
 
-        <nav class="navbar">
-            <a href="#" onclick="showPage(0); return false;">Home</a>
-            <a href="#" onclick="showPage(1); return false;">Garden</a>
-            <a href="#" onclick="showPage(2); return false;">Letter</a>
-            <a href="#" onclick="showPage(3); return false;">Memories</a>
-            <a href="#" onclick="showPage(4); return false;">Surprise</a>
-        </nav>
-    </header>
-    <section class="page active" id="home">
-        <div class="content">
-            <p class="small-title">A LITTLE WORLD MADE FOR YOU</p>
+        <a class="contact-card reveal" href="tel:+917505503871">
+          <span class="contact-icon"><i data-lucide="phone"></i></span>
+          <span><small>CALL / MESSAGE</small><b>+91 7505503871</b></span>
+          <i class="contact-arrow" data-lucide="arrow-up-right"></i>
+        </a>
 
-            <h1>Sumit <span>♡</span> Lovely</h1>
+        <a class="contact-card reveal" href="https://github.com/deepsanatani38-ux" target="_blank" rel="noopener noreferrer">
+          <span class="contact-icon"><i data-lucide="github"></i></span>
+          <span><small>CODE & REPOSITORIES</small><b>GitHub profile</b></span>
+          <i class="contact-arrow" data-lucide="arrow-up-right"></i>
+        </a>
 
-            <h2>My Favourite Person, My Favourite Feeling</h2>
-
-            <p>
-                Some people make life beautiful just by being in it.
-                You are that special person in my world.
-            </p>
-
-            <button class="btn" onclick="showPage(1)">
-                Enter Our Garden 🌹
-            </button>
-        </div>
-
-        <div class="floating-rose">🌹</div>
+        <a class="contact-card reveal" href="https://www.linkedin.com/in/sumit-babu-a08636432" target="_blank" rel="noopener noreferrer">
+          <span class="contact-icon"><i data-lucide="linkedin"></i></span>
+          <span><small>PROFESSIONAL PROFILE</small><b>LinkedIn profile</b></span>
+          <i class="contact-arrow" data-lucide="arrow-up-right"></i>
+        </a>
+      </div>
     </section>
+  </main>
 
-    <section class="page" id="garden">
-        <div class="content">
-            <p class="small-title">OUR LITTLE GARDEN</p>
 
-            <h1>A Rose For You 🌹</h1>
+  <footer class="footer">
+    <a class="brand" href="#home">
+      <span class="brand-mark">S<span>.</span></span>
+      <span>SUMIT <b>BABU</b></span>
+    </a>
+    <p>Designed with curiosity. Built with code.</p>
+    <a href="#top" class="back-top">BACK TO TOP ↑</a>
+    <small>© <span id="year"></span> Sumit Babu</small>
+  </footer>
 
-            <p>
-                Every rose reminds me of your beauty,
-                and every petal reminds me of a beautiful moment.
-            </p>
-
-            <div class="rose-box">
-                <div class="big-rose">🌹</div>
-
-                <h2 id="roseTitle">For My Lovely</h2>
-
-                <p id="roseQuote">
-                    You make my little world more beautiful.
-                </p>
-
-                <button class="btn" onclick="pickRose()">
-                    Pick Another Rose 🌷
-                </button>
-            </div>
-        </div>
-    </section>
-
-    <section class="page" id="letter">
-        <div class="content">
-            <p class="small-title">WORDS FROM MY HEART</p>
-
-            <h1>A Letter For You 💌</h1>
-
-            <p>
-                Some feelings are too special to say aloud.
-                So, here is a little letter for you.
-            </p>
-
-            <div class="letter-box">
-                <div class="envelope">💌</div>
-
-                <button class="btn" onclick="openLetter()">
-                    Open My Letter
-                </button>
-
-                <div class="letter-paper" id="letterPaper">
-                    <h2>My Lovely ❤️</h2>
-
-                    <p>
-                        You are one of the most beautiful parts of my life.
-                        Your smile makes my days brighter, and your presence
-                        makes ordinary moments feel special.
-                    </p>
-
-                    <p>
-                        No matter how many words I write, they will never
-                        be enough to explain how special you are to me.
-                    </p>
-
-                    <p>
-                        Thank you for being you. You will always have
-                        a special place in my heart.
-                    </p>
-
-                    <h3>Forever with love,</h3>
-                    <h2>Yours, Sumit ❤️</h2>
-
-                    <button class="btn" onclick="closeLetter()">
-                        Close Letter
-                    </button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="page" id="memories">
-        <div class="content">
-            <p class="small-title">OUR SPECIAL MOMENTS</p>
-
-            <h1>Beautiful Memories 📸</h1>
-
-            <p>
-                Every picture holds a moment.
-                Every moment holds a feeling.
-            </p>
-
-            <div class="memories-grid">
-
-                <div class="memory-card">
-                    <img
-                        src="./Image/file_00000000e9a881fa9c73449c61b9a72e.png"
-                        alt="Special memory one"
-                    >
-                    <h3>A Special Moment ❤️</h3>
-                </div>
-
-                <div class="memory-card">
-                    <img
-                        src="./Image/Screenshot_20260614-091615.png"
-                        alt="Special memory two"
-                    >
-                    <h3>Sweet Memories 🌸</h3>
-                </div>
-
-                <div class="memory-card">
-                    <img
-                        src="./Image/1782305476609.png"
-                        alt="Special memory three"
-                    >
-                    <h3>Always Remember 🌹</h3>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <section class="page" id="surprise">
-        <div class="content">
-            <p class="small-title">A LITTLE SURPRISE FOR YOU</p>
-
-            <h1>One Last Little Surprise 🎁</h1>
-
-            <p>
-                There is something special I want you to remember.
-            </p>
-
-            <div class="surprise-box">
-                <div class="gift">🎁</div>
-
-                <button class="btn" onclick="openSurprise()">
-                    Open Your Surprise ❤️
-                </button>
-
-                <div id="surpriseMessage" class="surprise-message">
-                    <h2>My Lovely, You Are Special! 💖</h2>
-
-                    <p>
-                        If I could give you one thing in life,
-                        I would give you the ability to see yourself
-                        through my eyes. Then you would understand
-                        how precious you are to me.
-                    </p>
-
-                    <h2>Sumit ♡ Lovely</h2>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer class="page-controls">
-        <button class="btn" onclick="previousPage()">
-            ← Previous
-        </button>
-
-        <span id="pageNumber">1 / 5</span>
-
-        <button class="btn" onclick="nextPage()">
-            Next →
-        </button>
-    </footer>
 </body>
 </html>

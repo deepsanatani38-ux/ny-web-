@@ -89,3 +89,4 @@ form.addEventListener("submit", async (event) => {
     button.disabled = false;
   }
 });
+window.location.href = "./index.html";

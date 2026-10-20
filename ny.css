@@ -1243,3 +1243,121 @@ svg {
 
 .goal-inner p {
   max-
+/* ===== EXTRA PREMIUM ANIMATIONS ===== */
+
+/* Hero title entrance */
+.hero-title.title-animated {
+  animation: nameEntrance 1.15s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.hero-title.title-animated > span:first-child {
+  display: inline-block;
+  animation: nameGlow 3s ease-in-out 1.2s infinite alternate;
+}
+
+.hero-title.title-animated .outline-text {
+  animation: outlineReveal 1.2s ease 0.25s both;
+}
+
+/* Hero text entrance */
+.hero-copy .eyebrow {
+  animation: nameEntrance 0.7s ease both;
+}
+
+.hero-copy .hero-description {
+  animation: nameEntrance 0.9s ease 0.3s both;
+}
+
+.hero-copy .hero-actions {
+  animation: nameEntrance 0.9s ease 0.45s both;
+}
+
+@keyframes nameEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(35px);
+    filter: blur(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes nameGlow {
+  from {
+    text-shadow: 0 0 0 transparent;
+  }
+  to {
+    text-shadow: 0 0 22px #ff405850;
+  }
+}
+
+@keyframes outlineReveal {
+  from {
+    opacity: 0;
+    letter-spacing: 2px;
+  }
+  to {
+    opacity: 1;
+    letter-spacing: -3px;
+  }
+}
+
+/* Button click feedback */
+.button.click-feedback,
+.project-link.click-feedback {
+  animation: clickPulse 0.3s ease;
+}
+
+@keyframes clickPulse {
+  50% {
+    transform: scale(0.96);
+  }
+}
+
+/* Photo hover enhancement */
+.portrait-card {
+  transition: box-shadow 0.4s ease, border-color 0.4s ease;
+}
+
+.portrait-card:hover {
+  border-color: #45a4ff;
+  box-shadow: 0 25px 80px #0006, 0 0 35px #45a4ff25;
+}
+
+/* Skill cards and project hover */
+.skills-panel,
+.contact-card,
+.timeline-card {
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.skills-panel:hover,
+.contact-card:hover,
+.timeline-card:hover {
+  box-shadow: 0 12px 35px #0002;
+}
+
+/* Better focus for keyboard users */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid #45a4ff;
+  outline-offset: 4px;
+  border-radius: 5px;
+}
+
+/* Prevent extra motion when reduced motion is enabled */
+@media (prefers-reduced-motion: reduce) {
+  .hero-title.title-animated,
+  .hero-title.title-animated > span:first-child,
+  .hero-title.title-animated .outline-text,
+  .hero-copy .eyebrow,
+  .hero-copy .hero-description,
+  .hero-copy .hero-actions {
+    animation: none !important;
+  }
+}
